@@ -37,7 +37,7 @@ body{
       margin: 0.75%;
     }
 .invoices{
-    background: linear-gradient(red,yellow,black);
+    background: linear-gradient(#5E503F,#C6AC8F,#EAE0D5);
 }
 .invoice{
  max-width: 74%;
@@ -59,11 +59,30 @@ body{
 }
 .box{
     display: flex;
+    
 }
 .right{
     margin-right: auto;
     width: 50%;
     padding: 1%;
+}
+.oval{
+  background-color: white;
+  display: flex;
+  margin: auto;
+  max-width: 74%;
+  border-radius: 20px 20px 20px 20px;
+  background-color:blue;
+}
+.customer{
+  width: 70%;
+  display: flex;
+  background-color: yellow;
+}
+.status{
+  width: 15%;
+  background-color: #800040;
+  justify-content: center;
 }
 .left{
     margin-left: auto;
@@ -74,6 +93,10 @@ body{
 }
 .picture{
     width:25%;
+}
+.vl {
+  border-left: 6px solid green;
+  height: 100px;
 }
 .contact{
     text-align: center;

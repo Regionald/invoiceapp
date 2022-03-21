@@ -1,8 +1,9 @@
 
 function downloadPDF(id) {
-    const element = document.getElementById(id);
+    const element = document.getElementById(id).outerHTML;
     // element.setAttribute('width','50px');
-    // html2pdf().from(element).save();
+  // html2pdf().from(element).save();
+    console.log(element);
     html2pdf().from(element).set({
         margin:       [1, 0, 0, 0], 
           filename: 'invoice.pdf',
@@ -20,4 +21,5 @@ function downloadPDF(id) {
            
             }
         }).save();
+
 }

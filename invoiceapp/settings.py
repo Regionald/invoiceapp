@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'invoiceapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'testinvoice',
+        'NAME': 'invoice',
         'HOST'     : '127.0.0.1',
         'PORT'     : '3306',
         'USER'     : 'root',
@@ -87,7 +87,7 @@ DATABASES = {
     }
 }
 
-
+AUTH_USER_MODEL = 'invoice.User'
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 

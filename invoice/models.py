@@ -1,12 +1,12 @@
 from itertools import product
 from sys import maxsize
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
-class User(models.Model):
-    email = models.CharField(max_length=30)
-    password = models.CharField(max_length=60)
+class User(AbstractUser):
+    email = models.CharField(max_length=60)
     password = models.CharField(max_length=60)
     companyName=models.CharField(max_length=100,default='No name')
     companyAddress=models.CharField(max_length=100,default='No address')
@@ -17,13 +17,15 @@ class User(models.Model):
     verified=models.BooleanField(default=False)
 
 class Clients(models.Model):
-    email = models.CharField(max_length=30)
-    clientName = models.CharField(max_length=60)
-    clientAddress = models.CharField(max_length=60)
+    email = models.CharField(max_length=30,)
+    clientName = models.CharField(max_length=60,default='No name')
+    clientAddress = models.CharField(max_length=60,default='No name')
     clientTown=models.CharField(max_length=100,default='No name')
     clientpostalCode=models.IntegerField(default=1540)
-    products=models.JSONField()
+    products=models.JSONField(default=dict)
     subTotal=models.IntegerField(default=0)
     vat=models.IntegerField(default=0)
     Total=models.IntegerField(default=0)
-    
+
+#dueDate=models.CharField(max_length=60,null=True,blank=True)
+#createDate=models.CharField(max_length=60,null=True,blank=True)   

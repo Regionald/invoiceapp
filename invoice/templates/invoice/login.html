@@ -21,7 +21,7 @@
            <br>
            <input type="password" name="password" placeholder="Account Password" class="input" id="password">
            <br>
-           <div class="showBtn" style="display: none;">
+           <div class="showBtn">
            <label>Show Password <input type="checkbox" onclick="showPassword()"></label>
            </div>
            <br>
@@ -31,6 +31,11 @@
            <a href="#">forgot password</a>
 
        </form>
+       {% if messages %}
+      <ul class="messages">
+       <li>{{ message }}</li>
+      </ul>
+      {% endif %}
        <br>
         <button class="btn signUpbtn">Sign-up</button>
    </div>

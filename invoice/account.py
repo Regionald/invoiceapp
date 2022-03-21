@@ -7,7 +7,6 @@ from django.contrib import messages
 #@ POST /account/create
 
 def createAcount(request):
-
  if request.method == 'POST':
        email=request.POST.get('email')
        password=request.POST.get('password')
@@ -17,17 +16,19 @@ def createAcount(request):
        postalCode=request.POST.get('postalCode')
        accountNumber=request.POST.get('accountNumber')
        #logoName=request.POST.get('')
-       print(email,password,companyAddress,companyName,town,postalCode,accountNumber)
-       try :
-               user=User.objects.create(
-               email=email,
-               password=password,
-               companyName=companyName,
-               companyAddress=companyAddress,
-               town=town,
-               postalCode=postalCode,
-               accountNumber=accountNumber
-               )
+       print(email)
+       try : 
+        print('Ínside try')
+        user=User.objects.create(
+        email=email,
+        password=password,
+        companyName=companyName,
+        companyAddress=companyAddress,
+        town=town,
+        postalCode=postalCode,
+        accountNumber=accountNumber
+        )
+        user.save()
        except:
            messages.error(request, 'Username OR password does not exit')
 

@@ -11,4 +11,5 @@ urlpatterns =[
     path('invoice/',invoice.invoice,name='get invoice'),
     path('invoice/create/',invoice.create,name='create invoice'),
     path('account/create/',account.createAcount,name='create account'),
+    path('invoice/download/<int:id>/',invoice.download,name='download'),
 ]
