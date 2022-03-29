@@ -4,15 +4,18 @@
 <body>
 
     <hr>
-
-    <br>
+    <div class="search">
+    <input style="width: 80%;" type="text" placeholder="search using invoive number or customer name" name="code">
+    <button class="searchBtn">submit</button>
+    </div>
     <div class="invoices">
 
         {% for client in client %}
 
 
-
+        <br>
         <div class="oval">
+            
             <div class="status">
                 <div class="vl"></div>
             </div>
@@ -33,7 +36,15 @@
                 </div>
             </div>
             <div class="status">
-              <div class="vl"></div>
+              <div class="dropdown">
+                <button class="dropbtn">...</button>
+                <div class="dropdown-content">
+                  <a href="copy/{{client.id}}">Copy</a>
+                  <a href="edit/{{client.id}}">Edit</a>
+                  <a href="delete/{{client.id}}">delete</a>
+                  <a href="email/{{client.id}}">Send via email</a>
+                </div>
+              </div>
             </div>
 
         </div>

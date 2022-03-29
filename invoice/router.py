@@ -12,4 +12,6 @@ urlpatterns =[
     path('invoice/create/',invoice.create,name='create invoice'),
     path('account/create/',account.createAcount,name='create account'),
     path('invoice/download/<int:id>/',invoice.download,name='download'),
+    path('invoice/delete/<int:id>/',invoice.delete,name='delete invoice'),
+    path('invoice/email/<int:id>/',invoice.sendEmail,name='send invoice'),
 ]

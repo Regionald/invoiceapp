@@ -1,6 +1,10 @@
+from cgitb import html
 from copyreg import clear_extension_cache
 import datetime
+import email
 from email.policy import HTTP
+from importlib.resources import contents
+from multiprocessing import context
 from pickle import TRUE
 from pickletools import read_bytes4
 from re import sub
@@ -10,12 +14,15 @@ from invoice.models import Clients
 from django.contrib import messages
 from django.http import HttpResponse
 import os
-os.add_dll_directory(r"C:\Program Files\GTK3-Runtime Win64\bin")
-os.add_dll_directory(r"C:\Program Files\GTK3-Runtime Win64\lib\girepository-1.0")
+#os.add_dll_directory(r"C:\Program Files\GTK3-Runtime Win64\bin")
+#os.add_dll_directory(r"C:\Program Files\GTK3-Runtime Win64\lib\girepository-1.0")
 #from weasyprint import HTML
 import tempfile
 from django.template.loader import render_to_string
-
+from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 #@descript /page after succeful loging
 #@ GET /invoice/
@@ -69,6 +76,25 @@ def download(request,id):
   invoice=Clients.objects.filter(id=id).values()
   print(invoice)
   return render(request,'invoice/download.html',{'client':invoice})
+
+def delete(request,id):
+  invoice=Clients.objects.filter(id=id).delete()
+  return redirect('/invoice/')
+
+def sendEmail(request,id):
+  to='201586414@student.uj.ac.za'
+  send=Clients.objects.filter(id=id).values()
+  html_content=render_to_string("invoice/email_template.html",{'client':send})
+  text_contect=strip_tags(html_content)
+  email=EmailMultiAlternatives(
+    'Testing',
+    text_contect,
+    'regionaldmongwe@gmail.com',
+    [to]
+  )
+  email.attach_alternative(html_content,"text/html")
+  email.send()
+  return redirect('/invoice/')
 
 
 
