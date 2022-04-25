@@ -20,7 +20,7 @@
 
                     </td>
                     <td id="rate">
-                        <input type="number" name="rate" placeholder="rate per Item in R">
+                        <input type="number" name="rate" placeholder="rate per Item in R" step="0.01">
                     </td>
                     <td id="qty">
                         <input type="number" name="qty" placeholder="quantity">
@@ -47,8 +47,9 @@
             <br>
             <input type="text" placeholder="town" name="town">
             <br>
-            <input type="number" placeholder="code" name="code">
+            <input type="number" placeholder="code" name="code" minlength="4">
             <br>
+            <input type="email" placeholder="email" name="clientEmail">
             <input type="date" placeholder="YYYY/DD/MM" name="dueDate">
             <br>
                     <label>
@@ -238,6 +239,7 @@
             const newRate = document.createElement('input');
             newRate.setAttribute('type', 'number');
             newRate.setAttribute('name', 'rate');
+            newRate.setAttribute('step', '0.01');
             newRate.setAttribute('placeholder', 'rate per Item in R');
             rate.appendChild(newRate);
 

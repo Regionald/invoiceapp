@@ -1,6 +1,7 @@
 from asyncio.windows_events import NULL
+from distutils.log import error
 from django.shortcuts import render, redirect
-from .models import User
+from .models import User,Clients
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 
@@ -19,21 +20,23 @@ def landing(request):
 def user(request):
     if request.method == 'POST':
        email=request.POST.get('email')
+       username=request.POST.get('email')
        password=request.POST.get('password')
-       #user=User.objects.filter(email=email).first()
+       print(email,password)
        try:
-        user=User.objects.get(email=email,password=password)
-        print(1,user)
+        user=User.objects.get(email=email)
+        print('email exist',user)
        except:
+        print('use no exist')
         messages.error(request, 'Username OR password does not exit')
 
-       user=authenticate(request,email=email,password=password) 
+       user=authenticate(request,username=username,password=password)#,password=password) 
        print(3,user)
        if user is not None:
            login(request,user)
            print('print is not None')
            return redirect('/home/')
-    print(email,password)
+    print(request.user)
     return redirect('/')
 
 
@@ -44,3 +47,6 @@ def user(request):
 def home(request):
     return render(request,'invoice/index.html')
 
+def logOut(request):
+  logout(request)
+  return redirect('/')

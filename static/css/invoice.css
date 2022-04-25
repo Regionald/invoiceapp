@@ -61,6 +61,10 @@ body{
     display: flex;
     
 }
+.boxx{
+  width: 70%;
+  margin: auto;
+}
 .right{
     margin-right: auto;
     width: 50%;
@@ -76,6 +80,7 @@ body{
 }
 .search{
   width: 70%;
+  display: flex;
   margin: auto;
   border-radius: 20px 20px 20px 20px;
   position: sticky;
@@ -108,6 +113,14 @@ body{
     width:25%;
 }
 .vl {
+  border-left: 6px solid green;
+  height: 100px;
+}
+.notSent {
+  border-left: 6px solid red;
+  height: 100px;
+}
+.sent {
   border-left: 6px solid green;
   height: 100px;
 }

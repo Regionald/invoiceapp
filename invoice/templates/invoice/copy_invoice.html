@@ -23,7 +23,7 @@
                     <b>Invoice</b><br>
                     <br>
                     {% load static %}
-                    <img src="{{user.avatar.url}}" alt="pic" class="picture">
+                    <img src="" alt="pic" class="picture">
                 </div>
             </div>
             <hr>
@@ -43,6 +43,14 @@
                     <b>Due Date:{{client.dueDate}}</b><br>
 
                 </div>
+            </div>
+            <hr>
+            <div class="boxx">
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="date" value="{{client.dueDate}}" placeholder="{{client.dueDate}}" name="dueDate">
+                <button type="submit" class="btn">update</button>
+            </form>
             </div>
             <hr>
             <div class="box">
@@ -96,10 +104,6 @@
                     <a href="#">invoice powered by TR-invoice</a>
                 </div>
             </div>
-        </div>
-
-        <div class="action">
-            <button value="{{client.id}}" onclick="downloadPDF(this.value)">save pdf</button>
         </div>
        {% endfor %}
 

@@ -1,5 +1,6 @@
 {% extends 'main.html' %}
 {% block content %}
+
 <body>
 
     <hr>
@@ -8,7 +9,7 @@
     <div class="invoices">
 
         {% for client in client %}
-          
+
 
         <div class="invoice" id="{{client.id}}">
 
@@ -23,26 +24,27 @@
                     <b>Invoice</b><br>
                     <br>
                     {% load static %}
-                    <img src="{{user.avatar.url}}" alt="pic" class="picture">
+                    <img src="" alt="pic" class="picture">
                 </div>
             </div>
             <hr>
 
-            <div class="box">
-                <div class="right">
-                    <p>bill to :</p>
-                    <b>{{client.clientName}}</b>
-                    <p>{{client.clientAddress}}</p>
-                    <p>{{client.clientTown }}</p>
-                    <p>{{client.clientpostalCode}}</p>
-                </div>
-                <div class="left" style="text-align: right;">
-                    <b>Invoice Id:inv-{{client.id}}</b><br>
-                    <h6>Date:{{client.date}}</h6>
-                    <h6>Account number:1541048928</h6>
-                    <b>Due Date:{{client.dueDate}}</b><br>
-
-                </div>
+            <div class="boxx" >
+                    <p>bill to :</p> 
+                    <form action="" method="post">
+                        {% csrf_token %}
+                    <input type="text" value="{{client.clientName}}" placeholder="Name" name="name">
+                    <br>
+                    <input type="text" value="{{client.clientAddress}}" placeholder="address" name="address">
+                    <br>
+                    <input type="text" value="{{client.clientTown }}" placeholder="town" name="town">
+                    <br>
+                    <input type="number" value="{{client.clientpostalCode}}" placeholder="code" name="code" minlength="4">
+                    <br>
+                    <input type="email" value="{{client.clientEmail}}" placeholder="email" name="clientEmail">
+                    <input type="date" value="{{client.dueDate}}" placeholder="{{client.dueDate}}" name="dueDate">
+                    <button type="submit" class="btn">update</button>
+                   </form>
             </div>
             <hr>
             <div class="box">
@@ -53,14 +55,14 @@
                         <th>QTY</th>
                         <th>AMOUNT</th>
                     </tr>
-                    {% for product in client.products  %}
+                    {% for product in client.products %}
                     <tr>
                         <td>{{product.descpript}}</th>
                         <td>R{{product.rate}}</th>
                         <td>{{product.qty}}</th>
                         <td>R{{product.amount}}</th>
                     </tr>
-                    {% endfor  %}
+                    {% endfor %}
 
                     <tr>
                         <td>
@@ -98,10 +100,7 @@
             </div>
         </div>
 
-        <div class="action">
-            <button value="{{client.id}}" onclick="downloadPDF(this.value)">save pdf</button>
-        </div>
-       {% endfor %}
+        {% endfor %}
 
     </div>
     <hr>
@@ -116,6 +115,6 @@
         <br>
 
     </div>
-   
+
 </body>
- {% endblock %}
+{% endblock %}
