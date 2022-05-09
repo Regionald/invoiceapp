@@ -11,6 +11,23 @@ from django.contrib import messages
 #@ GET /
 def landing(request):
     print(request)
+    if request.method == 'POST':
+       email=request.POST.get('email')
+       username=request.POST.get('email')
+       password=request.POST.get('password')
+       print(email,password)
+       try:
+        user=User.objects.get(email=email)
+        print('email exist',user)
+       except:
+        messages.error(request, 'username or password does not exist')
+
+       user=authenticate(request,username=username,password=password)
+       print(3,user)
+       if user is not None:
+           login(request,user)
+           print('print is not None')
+           return redirect('/home/')
     return render(request,'invoice/login.html')
 
 
@@ -28,7 +45,7 @@ def user(request):
         print('email exist',user)
        except:
         print('use no exist')
-        messages.error(request, 'Username OR password does not exit')
+        messages.error(request, 'Username OR password does not exist')
 
        user=authenticate(request,username=username,password=password)#,password=password) 
        print(3,user)

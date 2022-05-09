@@ -7,7 +7,7 @@
     <form action="/invoice/create/" method="post">
         {% csrf_token %} 
         <div class="card home">
-            <h3><b>products and services</b></h3>
+            <h3><b>Products and Services</b></h3>
             <table>
                 <tr>
                     <th>DESCRIPTION</th>
@@ -16,14 +16,14 @@
                 </tr>
                 <tr>
                     <td id="discript">
-                        <input type="text" name="descript" placeholder="description">
+                        <input type="text" name="descript" placeholder="Description">
 
                     </td>
                     <td id="rate">
-                        <input type="number" name="rate" placeholder="rate per Item in R" step="0.01">
+                        <input type="number" name="rate" placeholder="Rate per Item in R" step="0.01">
                     </td>
                     <td id="qty">
-                        <input type="number" name="qty" placeholder="quantity">
+                        <input type="number" name="qty" placeholder="Quantity">
                     </td>
                 </tr>
             </table>
@@ -39,17 +39,17 @@
             <hr>
 
 
-            <h3><b>bill to</b></h3>
-
-            <input type="text" placeholder="Name" name="name">
+            <h3><b>Bill to</b></h3>
+            <div class="nameTitle"><h3 >Namee:</h3></div>
+            <input class="nameInput" type="text" placeholder="Name" name="name">
             <br>
-            <input type="text" placeholder="address" name="address">
+            <input type="text" placeholder="Address" name="address">
             <br>
-            <input type="text" placeholder="town" name="town">
+            <input type="text" placeholder="Town" name="town">
             <br>
-            <input type="number" placeholder="code" name="code" minlength="4">
+            <input type="number" placeholder="Code" name="code" minlength="4">
             <br>
-            <input type="email" placeholder="email" name="clientEmail">
+            <input type="email" placeholder="Email" name="clientEmail">
             <input type="date" placeholder="YYYY/DD/MM" name="dueDate">
             <br>
                     <label>
@@ -58,11 +58,11 @@
                     </label>
                     <label>
                         <input type="radio" name="typeOFinvoice" value="invoice">
-                        invoice
+                        Invoice
                     </label>
             <br>
             <br>
-            <button>create invoice</button>
+            <button class="btn">Create invoice</button>
         </div>
 
 
@@ -152,8 +152,8 @@
                     </tr>
                 </table>
             </div>
-            <hr>
             <div class="box">
+                <hr>
                 <div class="contact">
                     <b>Thank you for your Business</b>
                     <h6>0676527884|regionaldmongwe@gmail.com|SMEs.com</h6>
@@ -176,8 +176,8 @@
     <div class="foot">
 
         <h3>The smart Invoice</h3>
-        <h6><a href="#">Disclaimer</a>|<a href="#">Privacy police</a>|<a href="#">Reports</a>|<a href="#">News</a>|<a
-                href="#">Contact us</a>|<a href="#">About Us</a></h6>
+        <h6><a href="#">Disclaimer</a>|<a href="#">Privacy policy</a>|<a href="#">Reports</a>|<a href="#">News</a>|<a
+                href="#">Contact us</a>|<a href="#">About us</a></h6>
         <h6>© 2022-2022 TR-invoice. All rights reserved. Version: 1.0.0</h6>
         <br>
 

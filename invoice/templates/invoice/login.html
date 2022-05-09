@@ -5,37 +5,35 @@
 
    <div class="navigator">
    <button class="btn homebtn">Home</button>
-   <button class="btn aboutbtn">About Us</button>
-   <button class="btn contactbtn">Contact Us</button>
+   <button class="btn aboutbtn">About us</button>
+   <button class="btn contactbtn">Contact us</button>
 
    </div>
    <hr>
-   <h1 style="text-align: center;">SmartInvoice</h1>
+   <h1 style="text-align: center;">Smart Invoice</h1>
    <br>
    <div class="card home">
        <h1><b>Hello there!</b></h1>
-       <h6>Sign in with your TR-invoice Account</h6>
-       <form action="user/" method="post">
+       <h6>Sign in with your TR-Invoice account</h6>
+       <form action=" " method="post">
            {% csrf_token %}
-           <input type="email" name="email" placeholder="sign in with your Account" class="input">
+           
+           <input class="input-field" type="email" name="email" placeholder="Sign in with your account" class="input">
+           <i class="fa fa-user icon"></i>
+           <input class="input-field" type="password" name="password" placeholder="Login password" class="input" id="password">
+           <i class="fa fa-eye icon" onclick="showPassword()"></i>
            <br>
-           <input type="password" name="password" placeholder="Account Password" class="input" id="password">
-           <br>
-           <div class="showBtnn">
-           <label>Show Password <input type="checkbox" onclick="showPassword()"></label>
-           </div>
+           {% if messages %}
+           {% for message in messages %}
+            <div class="alert alert-{{message.tags}}" style="color: red;">{{message}}</div>
+            {% endfor %}
+           {% endif %}
            <br>
            <h6></h6>
            <button type="submit" class="btn">login</button>
            <br>
-           <a href="#">forgot password</a>
-
+           <a href="#">Forgot password</a>
        </form>
-       {% if messages %}
-      <ul class="messages">
-       <li>{{ message }}</li>
-      </ul>
-      {% endif %}
        <br>
         <button class="btn signUpbtn">Sign-up</button>
    </div>
@@ -112,7 +110,7 @@
        <form action="/contactUs">
            <textarea name="emailMessage" id="" cols="30" rows="10"></textarea>
            <br>
-           <button type="submit">send</button>
+           <button class="btn" type="submit">send</button>
        </form>
    </div>
    <hr>
@@ -120,8 +118,8 @@
      <div class="foot">
        <h3>The smart Invoice</h3>
        <h6><a href="#">Disclaimer</a>|<a href="#">Privacy police</a>|<a href="#">News</a>|<a href="#" id="contactFooter">Contact us</a>|<a
-               href="#" id="aboutFooter">About Us</a></h6>
-       <h6>© 2022-2022 TR-invoice. All rights reserved. Version: 1.0.0</h6>
+               href="#" id="aboutFooter">About us</a></h6>
+       <h6>© 2022 TR-invoice. All rights reserved. Version: 1.0.0</h6>
        <br>
    </div>
 

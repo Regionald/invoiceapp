@@ -30,7 +30,7 @@
 
             <div class="box">
                 <div class="right">
-                    <p>bill to :</p>
+                    <p>Bill to :</p>
                     <b>{{client.clientName}}</b>
                     <p>{{client.clientAddress}}</p>
                     <p>{{client.clientTown }}</p>
@@ -99,7 +99,7 @@
         </div>
 
         <div class="action">
-            <button value="{{client.id}}" onclick="downloadPDF(this.value)">save pdf</button>
+            <button class="btn" style="text-align: center;" value="{{client.id}}" onclick="downloadPDF(this.value)"><i class="fa fa-download" aria-hidden="true"></i>&nbspsave pdf</button>
         </div>
        {% endfor %}
 
@@ -111,8 +111,8 @@
 
         <h3>The smart Invoice</h3>
         <h6><a href="#">Disclaimer</a>|<a href="#">Privacy police</a>|<a href="#">Reports</a>|<a href="#">News</a>|<a
-                href="#">Contact us</a>|<a href="#">About Us</a></h6>
-        <h6>© 2022-2022 TR-invoice. All rights reserved. Version: 1.0.0</h6>
+                href="#">Contact us</a>|<a href="#">About us</a></h6>
+        <h6>© 2022 TR-Invoice. All rights reserved. Version: 1.0.0</h6>
         <br>
 
     </div>

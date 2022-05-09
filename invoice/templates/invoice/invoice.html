@@ -2,23 +2,25 @@
 {% block content %}
 
 <body>
-
   <hr>
-  <div class="search">
-    <div class="dropdown">
-      <button class="dropbtn">...</button>
-      <div class="dropdown-content">
-        <a href="profile/">profile</a>
-        <hr>
-        <a href="logout/">logout</a>
+  <div class="searcher">
+    <div class="profile">
+      <div class="dropdown">
+        <button class="dropbtn fa fa-user-circle" aria-hidden="true"></button>
+        <div class="dropdown-content">
+          <a href="profile/"><i class="fa fa-edit"></i>&nbspProfile</a>
+          <hr>
+          <a href="logout/"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbspLogout</a>
+        </div>
       </div>
     </div>
-    <form action="" method="POST">
+    <form class="search" action="" method="POST">
       {% csrf_token %}
-      <input style="width: 50%;" type="text" placeholder="search by customer name" name="clientName">
-      <button class="searchBtn">submit</button>
+      <input style="width: 60%;" type="text" placeholder="search by customer name" name="clientName">
+      <button type="submit"><i class="fa fa-search"></i></button>
     </form>
   </div>
+  <hr>
   <div class="invoices">
 
     {% for client in client %}
@@ -32,7 +34,7 @@
       </div>
       <div class="customer">
         <div class="right">
-          <p>bill to :</p>
+          <p>Bill to :</p>
           <b>{{client.clientName}}</b>
           <p>{{client.clientAddress}}</p>
           <p>{{client.clientTown }}</p>
@@ -48,15 +50,15 @@
       </div>
       <div class="status">
         <div class="dropdown">
-          <button class="dropbtn">...</button>
+          <button class="dropbtn fa fa-bars" aria-hidden="true"></button>
           <div class="dropdown-content">
-            <a href="copy/{{client.id}}">Copy</a>
+            <a href="copy/{{client.id}}"><i class="fa fa-copy"></i>&nbspCopy</a>
             <hr>
-            <a href="edit/{{client.id}}">Edit</a>
+            <a href="edit/{{client.id}}"><i class="fa fa-edit"></i>&nbspEdit</a>
             <hr>
-            <a href="delete/{{client.id}}">delete</a>
+            <a href="delete/{{client.id}}"><i class="fa fa-delete"></i>&nbspDelete</a>
             <hr>
-            <a href="email/{{client.id}}">Send via email</a>
+            <a href="email/{{client.id}}"><i class="fa fa-envelope" aria-hidden="true"></i>&nbspSend via email</a>
           </div>
         </div>
       </div>

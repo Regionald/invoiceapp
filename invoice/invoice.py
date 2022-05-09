@@ -1,8 +1,10 @@
 from cgitb import html
 from copyreg import clear_extension_cache
 import datetime
+from django.db.models import Sum
 import email
 from email.policy import HTTP
+from functools import lru_cache
 from importlib.resources import contents
 from multiprocessing import context
 from multiprocessing.connection import Client
@@ -15,6 +17,8 @@ from invoice.models import Clients,User
 from django.contrib import messages
 from django.http import HttpResponse
 import os
+from email.mime.image import MIMEImage
+from django.contrib.staticfiles import finders
 #os.add_dll_directory(r"C:\Program Files\GTK3-Runtime Win64\bin")
 #os.add_dll_directory(r"C:\Program Files\GTK3-Runtime Win64\lib\girepository-1.0")
 #from weasyprint import HTML
@@ -36,6 +40,23 @@ def invoice(request):
        client=Clients.objects.filter(clientName=clientName)
        print(client)
     return render(request,'invoice/invoice.html',{'client':client})
+
+def revenue(request):
+    client=Clients.objects.filter(email=request.user).values()
+    total=Clients.objects.filter(email=request.user).aggregate(Sum('Total'))
+    subTotal=Clients.objects.filter(email=request.user).aggregate(Sum('subTotal'))
+    tax=total['Total__sum']-subTotal['subTotal__sum']
+    tax=round(tax,2)
+    print('salary')
+    print(total)
+    if request.method == 'POST':
+       clientName=request.POST.get('clientName')
+       print(clientName)
+       client=Clients.objects.filter(clientName=clientName)
+       total=Clients.objects.filter(clientName=clientName,email=request.user).aggregate(Sum('Total'))
+       print('salary')
+       print(total)
+    return render(request,'invoice/revenue.html',{'client':client,'total':total,'subTotal':subTotal,'tax':tax})
 
 #@descript /create invoice 
 #@ GET /invoice/create
@@ -92,8 +113,11 @@ def download(request,id):
   return render(request,'invoice/download.html',{'client':invoice,'user':userDetails})
 
 def delete(request,id):
-  invoice=Clients.objects.filter(id=id).delete()
-  return redirect('/invoice/')
+  invoice=Clients.objects.filter(id=id)
+  if request.method == 'POST':
+    invoice.delete()
+    return redirect('/invoice/')
+  return render(request, 'invoice/delete.html', {'obj': id})
 
 def copy(request,id):
   invoice=Clients.objects.filter(id=id).values()
@@ -138,6 +162,14 @@ def editInvoice(request,id):
 
    return render(request,'invoice/edit_invoice.html',{'client':invoice,'user':userDetails})
 
+@lru_cache()
+def logo_data():
+  with open(finders.find('images/A_UdwzmPQ.png'),'rb') as f:
+    logo_data=f.read()
+  logo=MIMEImage(logo_data)
+  logo.add_header('Content-ID','<logo>')
+  return logo
+
 def sendEmail(request,id):
   status='sent'
   send=Clients.objects.filter(id=id).values()
@@ -147,6 +179,8 @@ def sendEmail(request,id):
   to=[emailClient,emailSME]
   html_content=render_to_string("invoice/email_template.html",{'client':send})
   text_contect=strip_tags(html_content)
+  print(text_contect)
+
   email=EmailMultiAlternatives(
     'Testing',
     text_contect,
@@ -155,6 +189,8 @@ def sendEmail(request,id):
   )
   email.attach_alternative(html_content,"text/html")
   Clients.objects.filter(id=id).update(status=status)
+  email.attach(logo_data())
+  email.mixed_subtype='related'
   email.send()
   return redirect('/invoice/')
 

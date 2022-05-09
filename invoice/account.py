@@ -33,9 +33,11 @@ def createUserAccount(request):
          avatar=logoName)
          user.set_password(password)
          user.save()
+         messages.error(request, 'Sign up successful !!! Log in using your new credentials')
 
        except:
            print('there is error')
+           messages.error(request, 'Username name already exists')
            print(error)
 
        return redirect('/')
@@ -55,6 +57,7 @@ def profileUpdate(request):
        postalCode=request.POST.get('postalCode')
        accountNumber=request.POST.get('accountNumber')
        logoName=request.FILES.get('logoName')
+
        print(email)
        try: 
          print('Try')
